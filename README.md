@@ -4,18 +4,19 @@ Basic algorithms practice to stay on top of it following Code Fellows graduation
 
 **Stacks**
 - Implement
-- prepend
-- append
+- push
+- pop
 
 **Queues**
 - Implement
 - Enqueue
 - Dequeue
+- peek
 
 **Linked Lists**
 - Implement
 - prepend
-- add to end
+- append
 
 **Trees**
 - Implement
