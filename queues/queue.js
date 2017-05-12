@@ -14,15 +14,27 @@ Queue.prototype.enqueue = function(val) {
     this.tail = node;
     return;
   }
-  let temp = this.tail;
+  this.tail.prev = node;
   this.tail = node;
-  this.tail.prev = temp;
   return;
 };
 
 Queue.prototype.dequeue = function() {
-  if(!this.head) return false;
+  if(!this.head) return;
+  if(!this.head.prev && !this.tail.prev) {
+    //in case the queue only has one node in it...
+    let temp = this.head;
+    this.head = null;
+    this.tail = null;
+    return temp.val;
+  }
   let temp = this.head;
-  this.head = this.head.next;
+  this.head = this.head.prev;
   return temp.val;
+};
+
+
+Queue.prototype.peek = function() {
+  if(!this.head) return;
+  return this.head.val;
 };
