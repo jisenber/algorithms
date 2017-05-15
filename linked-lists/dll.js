@@ -37,3 +37,26 @@ Dll.prototype.prepend = function(val) {
   this.head.next = temp;
   this.head.next.prev = node;
 };
+
+Dll.prototype.pop = function() {
+  if(!this.head) return false;
+  if(!this.head.next) {
+    let endVal = this.head.val;
+    this.head = null;
+    this.tail = null;
+    return endVal;
+  }
+  let endNode = this.tail;
+  this.tail = endNode.prev;
+  this.tail.next = null;
+  return endNode.val;
+};
+
+let dll = new Dll()
+dll.append(1);
+dll.append(2);
+dll.append(3);
+dll.pop();
+dll.pop()
+dll.pop()
+console.log(dll);

@@ -1,25 +1,34 @@
 # algorithms
 
-Basic algorithms practice to stay on top of it following Code Fellows graduation
+Basic  data structures and algorithms practice to stay on top of it following Code Fellows graduation.
 
 **Stacks**
-- Implement
+- Implementation
 - push
 - pop
 
 **Queues**
-- Implement
+- Implementation
 - Enqueue
 - Dequeue
-- peek
+- Peek
 
-**Linked Lists**
-- Implement
-- prepend
+**Singly Linked Lists**
+- Implementation
+- Prepend
+- Append
+- Pop (prototype method I added to help with tests)
+- Traversal helper functions
+- Transformation into Doubly linked Lists
+
+**Doubly Linked Lists**
+- Implementation
+- Prepend
 - append
+- pop (again, a prototype method I added to help with tests)
 
 **Trees**
-- Implement
+- Implementation
 - Depth First Search
 - Breadth First Search
 

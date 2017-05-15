@@ -47,6 +47,11 @@ Sll.prototype.prepend = function(val) {
 
 Sll.prototype.pop = function() {
   if (!this.head) return false;
+  if(!this.head.next) {
+    let endVal  = this.head;
+    this.head = null;
+    return endVal;
+  }
   let penultimateNode = findPenultimate(this.head);
   let endVal = penultimateNode.next.val;
   penultimateNode.next = null;
