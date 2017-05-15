@@ -1,4 +1,4 @@
-let Node = require('./node.js');
+let Node = require('./sll-node.js');
 
 let Sll = module.exports = function() {
   this.head = null;
@@ -24,6 +24,13 @@ let traverseSll = function(node) {
   return traverseSll(node);
 };
 
+//helper function to find the second-to-last node in a linked list
+let findPenultimate = function(node) {
+  if(!node.next.next) return node;
+  node = node.next;
+  return findPenultimate(node);
+};
+
 //add node to beginning of list
 Sll.prototype.prepend = function(val) {
   if(!val) return false;
@@ -38,20 +45,30 @@ Sll.prototype.prepend = function(val) {
   return;
 };
 
-//returns the value of the tail of the linked list
+Sll.prototype.pop = function() {
+  if (!this.head) return false;
+  let penultimateNode = findPenultimate(this.head);
+  let endVal = penultimateNode.next.val;
+  penultimateNode.next = null;
+  return endVal;
+};
+
+//returns the value of the tail of the linked list. version of peek
 let findEnd = function(sll) {
   let end = traverseSll(sll.head);
   return end.val;
 };
 
+//transforms a singly linked list into a doubly linked list
 let transformIntoDll = function(sll) {
   if(!sll) return false;
   if(!sll.head) return false;
   sll.head.prev = null;
-  let tailNode = traverseAndTransform(sll.head)
+  let tailNode = traverseAndTransform(sll.head);
   sll.tail = tailNode;
 };
 
+//helper function that traverses a singly linked list makes each node doubly linked
 let traverseAndTransform = function(node) {
   if(!node) return;
   if(node.next) {
@@ -61,10 +78,3 @@ let traverseAndTransform = function(node) {
     return node;
   }
 };
-
-let sll = new Sll();
-sll.append(5);
-sll.append(6);
-transformIntoDll(sll);
-
-console.log(sll);
