@@ -47,8 +47,19 @@ tree.insert(6);
 tree.insert(15);
 tree.insert(30);
 
-// function dfs(node, tree) {
-//   if(!tree || !node) return false
-//   if (!tree.root) return false
-//   if(tree.root.left)
-// }
+//pre-order depth-first search implementation
+function dfs(pointer, goal=30) {
+  if(!pointer) return false;
+  if(pointer.val === goal) {
+    console.log('true');
+    return
+  } if (pointer.left) {
+    dfs(pointer.left, goal);
+  } if (pointer.right) {
+    dfs(pointer.right, goal);
+  }
+  console.log('false');
+  return;
+}
+
+dfs(tree.root);
