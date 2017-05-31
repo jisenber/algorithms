@@ -2,6 +2,7 @@
 
 //bring in a binary search Node
 let Node = require('./bs-node.js');
+let Stack = require('../stacks/stack.js')
 
 //Tree constructor
 let Tree = module.exports = function() {
@@ -47,19 +48,29 @@ tree.insert(6);
 tree.insert(15);
 tree.insert(30);
 
-//pre-order depth-first search implementation
-function dfs(pointer, goal=30) {
+//traversal helper function that uses a stack
+function dfTraverse(pointer, stack=new Stack()) {
   if(!pointer) return false;
-  if(pointer.val === goal) {
-    console.log('true');
-    return
-  } if (pointer.left) {
-    dfs(pointer.left, goal);
+    stack.push(pointer.val)
+  if (pointer.left) {
+    dfTraverse(pointer.left, stack);
   } if (pointer.right) {
-    dfs(pointer.right, goal);
+    dfTraverse(pointer.right, stack);
   }
-  console.log('false');
-  return;
+  return stack
 }
 
-dfs(tree.root);
+//depth first search of a tree. Because a stack is used, it will go from right to left
+ function dfs(target, tree) {
+   let searchableStack = dfTraverse(tree.root)
+   while(searchableStack.size >= 1) {
+     let checkNode = searchableStack.pop()
+     if(checkNode === target) {
+       return true
+     }
+   }
+   return false
+ }
+
+
+console.log(dfs(90, tree))
