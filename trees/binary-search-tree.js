@@ -3,6 +3,7 @@
 //bring in a binary search Node
 let Node = require('./bs-node.js');
 let Stack = require('../stacks/stack.js')
+let Queue = require('../queues/queue.js')
 
 //Tree constructor
 let Tree = module.exports = function() {
@@ -38,17 +39,8 @@ function traverseDown(node, pointer) {
   }
 }
 
-//insert works. Now to implement Depth and Breadth first searches.
-let tree = new Tree();
-tree.insert(10);
-tree.insert(2);
-tree.insert(20);
-tree.insert(1);
-tree.insert(6);
-tree.insert(15);
-tree.insert(30);
 
-//traversal helper function that uses a stack
+//traversal helper function that pushes nodes into a stack
 function dfTraverse(pointer, stack=new Stack()) {
   if(!pointer) return false;
     stack.push(pointer.val)
@@ -61,8 +53,8 @@ function dfTraverse(pointer, stack=new Stack()) {
 }
 
 //depth first search of a tree. Because a stack is used, it will go from right to left
- function dfs(target, tree) {
-   let searchableStack = dfTraverse(tree.root)
+ Tree.prototype.dfs = function(target) {
+   let searchableStack = dfTraverse(this.root)
    while(searchableStack.size >= 1) {
      let checkNode = searchableStack.pop()
      if(checkNode === target) {
@@ -72,5 +64,33 @@ function dfTraverse(pointer, stack=new Stack()) {
    return false
  }
 
+//breadth first search on a binary search tree
+ Tree.prototype.bfs = function(target) {
+   if (!target) return false
+   let q = new Queue()
+   q.enqueue(this.root)
+   while(q.head) {
+     let pointer = q.dequeue()
+     console.log(pointer);
+     if(pointer.val === target) {
+       return true
+     }
+     if (pointer.left) {
+       q.enqueue(pointer.left)
+     } if (pointer.right) {
+        q.enqueue(pointer.right)
+     }
+   }
+   return false
+ }
 
-console.log(dfs(90, tree))
+ let tree = new Tree();
+ tree.insert(10);
+ tree.insert(2);
+ tree.insert(20);
+ tree.insert(1);
+ tree.insert(6);
+ tree.insert(15);
+ tree.insert(30);
+
+console.log(tree.bfs(31));
