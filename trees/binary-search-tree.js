@@ -66,23 +66,23 @@ function dfTraverse(pointer, stack=new Stack()) {
 
 //breadth first search on a binary search tree
  Tree.prototype.bfs = function(target) {
-   if (!target) return false
-   let q = new Queue()
-   q.enqueue(this.root)
+   if (!target) return false;
+   let q = new Queue();
+   q.enqueue(this.root);
    while(q.head) {
-     let pointer = q.dequeue()
-     console.log(pointer);
+     let pointer = q.dequeue();
+     console.log(pointer.val);
      if(pointer.val === target) {
-       return true
+       return true;
      }
      if (pointer.left) {
-       q.enqueue(pointer.left)
+       q.enqueue(pointer.left);
      } if (pointer.right) {
-        q.enqueue(pointer.right)
+        q.enqueue(pointer.right);
      }
    }
-   return false
- }
+   return false;
+ };
 
  let tree = new Tree();
  tree.insert(10);
